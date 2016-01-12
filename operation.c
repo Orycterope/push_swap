@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   operation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/12 15:38:13 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/12 20:48:00 by tvermeil         ###   ########.fr       */
+/*   Created: 2016/01/12 20:03:19 by tvermeil          #+#    #+#             */
+/*   Updated: 2016/01/12 20:41:06 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <stdlib.h>
-# include "libft.h"
-# include "pile.h"
-# include "operation.h"
+#include "operation.h"
 
-void		display_usage(char *command);
-
-#endif
+void	operation_swap(t_pile *pile)
+{
+	pile = pile->previous;
+	pile->previous->previous->next = pile;
+	pile->previous->next = pile->next;
+	pile->next->previous = pile->previous;
+	pile->previous = pile->previous->previous;
+	pile->next->previous->previous = pile;
+	pile->next = pile->next->previous;
+}

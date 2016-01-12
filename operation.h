@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   operation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/12 15:38:13 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/12 20:48:00 by tvermeil         ###   ########.fr       */
+/*   Created: 2016/01/12 20:06:17 by tvermeil          #+#    #+#             */
+/*   Updated: 2016/01/12 20:40:59 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-# include <stdlib.h>
-# include "libft.h"
+#ifndef OPERATION_H
+# define OPERATION_H
 # include "pile.h"
-# include "operation.h"
 
-void		display_usage(char *command);
+void	operation_swap(t_pile *pile);
 
 #endif

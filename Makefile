@@ -6,7 +6,7 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/12 18:45:21 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/12 20:49:04 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = gcc
 CFLAGS += -Wall -Wextra -Werror -I libft
 LDFLAGS += -L libft -lft
 SRCS =     	push_swap.c \
-			pile.c
+			pile.c \
+			operation.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
