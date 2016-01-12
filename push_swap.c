@@ -6,14 +6,14 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/12 17:12:06 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/12 18:52:13 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h> //
 
-static void	display_usage(char *command)
+void		display_usage(char *command)
 {
 	ft_putstr("usage: ");
 	ft_putstr(command);
@@ -60,12 +60,18 @@ static char	*get_flags(int *ac, char **av[])
 int			main(int ac, char *av[])
 {
 	char	*flags;
-	//int		*pile_a;
+	char	*command;
+	t_pile		*pile_a;
 	//int		*pile_b;
 
+	command = av[0];
 	if (ac < 2)
-		display_usage(av[0]);
+		display_usage(command);
 	flags = get_flags(&ac, &av);
+	if (ac < 1)
+		display_usage(command);
 	printf("flags : %s, first arg: %s, ac: %d\n", flags, av[0], ac);
+	pile_a = save_param_to_pile(ac, av, command);
+	printf("1: %d, 2: %d, 3: %d\n", pile_a->value, pile_a->next->value, pile_a->next->next->value);
 	return (0);
 }
