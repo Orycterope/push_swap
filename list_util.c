@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 19:30:04 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 21:56:06 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ t_pile	*get_next_unsorted(t_pile *pile)
 {
 	t_pile	*start;
 
+	if (pile == NULL)
+		return (NULL);
 	start = pile;
 	while (pile->next != start)
 	{

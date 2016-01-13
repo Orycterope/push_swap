@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:05:07 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 19:22:39 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 21:30:55 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "operation.h"
 # include "pile.h"
 # include "display.h"
+# include "string_utils.h"
 
 char	*solve(t_pile *pile_tab[], char *flags);
 

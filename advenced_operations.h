@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.h                                          :+:      :+:    :+:   */
+/*   advenced_operations.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/13 16:34:31 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 23:02:46 by tvermeil         ###   ########.fr       */
+/*   Created: 2016/01/13 21:59:02 by tvermeil          #+#    #+#             */
+/*   Updated: 2016/01/13 22:35:07 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DISPLAY_H
-# define DISPLAY_H
-# include "pile.h"
+#ifndef ADVENCED_OPERATIONS_H
+# define ADVENCED_OPERATIONS_H
+# include "operation.h"
 # include "libft.h"
-# include "list_util.h"
-# include "string_utils.h"
 
-void	print_piles(t_pile *pile_tab[]);
-void	display_pile(t_pile *pile, int height);
-void	add_operation(t_pile *pile_tab[], char *flags, char **op_lst, char *op);
+t_pile	**push_swap_until_sorted(t_pile *pile_tab[], char **op_lst, char *flag);
+t_pile	**check_for_swaps(t_pile *pile_tab[], char **op_lst, char *flags);
 
 #endif

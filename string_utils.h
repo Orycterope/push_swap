@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.h                                          :+:      :+:    :+:   */
+/*   string_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/13 16:34:31 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 23:02:46 by tvermeil         ###   ########.fr       */
+/*   Created: 2016/01/13 21:29:01 by tvermeil          #+#    #+#             */
+/*   Updated: 2016/01/13 23:03:32 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DISPLAY_H
-# define DISPLAY_H
-# include "pile.h"
+#ifndef STRING_UTILS_H
+# define STRING_UTILS_H
 # include "libft.h"
-# include "list_util.h"
-# include "string_utils.h"
 
-void	print_piles(t_pile *pile_tab[]);
-void	display_pile(t_pile *pile, int height);
-void	add_operation(t_pile *pile_tab[], char *flags, char **op_lst, char *op);
+void	put_oplist_colors(char *op_list, char *last_op);
 
 #endif

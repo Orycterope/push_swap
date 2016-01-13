@@ -6,7 +6,7 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/13 19:25:35 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/13 23:02:03 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRCS =     	push_swap.c \
 			operation.c \
 			display.c \
 			list_util.c \
+			solver.c \
+			string_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -36,6 +38,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f libft.a
 
 re: fclean all
 

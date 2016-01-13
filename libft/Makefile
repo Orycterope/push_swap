@@ -6,7 +6,7 @@
 #    By: tvermeil <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:45:52 by tvermeil          #+#    #+#              #
-#    Updated: 2015/11/27 14:56:20 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/13 22:59:32 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS =     ft_memset.c \
     ft_strnequ.c \
     ft_strsub.c \
     ft_strjoin.c \
+	ft_strjoin_free.c \
     ft_strtrim.c \
     ft_strsplit.c \
     ft_itoa.c \
