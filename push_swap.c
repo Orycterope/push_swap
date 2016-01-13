@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/12 18:52:13 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 17:05:29 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int			main(int ac, char *av[])
 {
 	char	*flags;
 	char	*command;
-	t_pile		*pile_a;
-	//int		*pile_b;
+	t_pile	*pile_tab[2];
 
 	command = av[0];
 	if (ac < 2)
@@ -71,7 +70,8 @@ int			main(int ac, char *av[])
 	if (ac < 1)
 		display_usage(command);
 	printf("flags : %s, first arg: %s, ac: %d\n", flags, av[0], ac);
-	pile_a = save_param_to_pile(ac, av, command);
-	printf("1: %d, 2: %d, 3: %d\n", pile_a->value, pile_a->next->value, pile_a->next->next->value);
+	pile_tab[0] = save_param_to_pile(ac, av, command);
+	pile_tab[1] = NULL;
+	print_piles(pile_tab);
 	return (0);
 }

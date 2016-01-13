@@ -6,17 +6,19 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/12 20:49:04 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/13 16:51:53 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-CFLAGS += -Wall -Wextra -Werror -I libft
+CFLAGS += -Wall -Wextra -Werror -I libft -g
 LDFLAGS += -L libft -lft
 SRCS =     	push_swap.c \
 			pile.c \
-			operation.c
+			operation.c \
+			display.c \
+
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
