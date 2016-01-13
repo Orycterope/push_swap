@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pile.h                                             :+:      :+:    :+:   */
+/*   list_util.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/12 17:21:28 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 19:23:39 by tvermeil         ###   ########.fr       */
+/*   Created: 2016/01/13 19:08:36 by tvermeil          #+#    #+#             */
+/*   Updated: 2016/01/13 19:30:15 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PILE_H
-# define PILE_H
-# include "libft.h"
+#ifndef LIST_UTIL_H
+# define LIST_UTIL_H
+# include "pile.h"
 
-typedef struct		s_pile
-{
-	struct s_pile	*previous;
-	struct s_pile	*next;
-	int				value;
-}					t_pile;
-
-t_pile			*create_block(int nbr);
-t_pile			*save_param_to_pile(int ac, char *av[], char *command);
-t_pile			*append_to_pile(int nbr, t_pile *pile);
-t_pile			*remove_from_pile(t_pile *maillon);
-void			display_usage(char *command);
+int		get_pile_size(t_pile *pile);
+int		get_dist(t_pile *block1, t_pile *block2);
+int		get_shortest_dist(t_pile *block1, t_pile *block2);
+t_pile	*get_next_unsorted(t_pile *pile);
 
 #endif

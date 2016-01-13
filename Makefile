@@ -6,7 +6,7 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/13 16:51:53 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/13 19:25:35 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =     	push_swap.c \
 			pile.c \
 			operation.c \
 			display.c \
+			list_util.c \
 
 OBJS = $(SRCS:.c=.o)
 

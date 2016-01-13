@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 17:05:29 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 17:29:35 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ int			main(int ac, char *av[])
 	printf("flags : %s, first arg: %s, ac: %d\n", flags, av[0], ac);
 	pile_tab[0] = save_param_to_pile(ac, av, command);
 	pile_tab[1] = NULL;
+	if (ft_strchr(flags, 'v'))
+		print_piles(pile_tab);
+
+	operation_swap(pile_tab[0]);
 	print_piles(pile_tab);
+	pile_tab[0] = operation_rotate(pile_tab[0], 1);
+	print_piles(pile_tab);
+	operation_push(pile_tab, 1);
+	print_piles(pile_tab);
+
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tvermeil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 16:03:13 by tvermeil          #+#    #+#             */
-/*   Updated: 2015/11/27 15:23:55 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 17:09:34 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (s == NULL)
+		return (NULL);
 	while (*s)
 		if (*s++ == (unsigned char)c)
 			return ((char *)s - 1);

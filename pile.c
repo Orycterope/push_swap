@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/12 20:02:32 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/13 18:50:53 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,6 @@ t_pile	*create_block(int nbr)
 	block->previous = block;
 	block->next = block;
 	return (block);
-}
-
-int		get_pile_size(t_pile *pile)
-{
-	int		size;
-	t_pile	*start;
-
-	if (pile == NULL)
-		return (0);
-	start = pile;
-	size = 1;
-	while (pile->next != start)
-	{
-		pile = pile->next;
-		size++;
-	}
-	return (size);
 }
 
 t_pile	*append_to_pile(int nbr, t_pile *pile)
