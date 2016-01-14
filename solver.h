@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:05:07 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 21:30:55 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 16:49:12 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SOLVER_H
 # include "libft.h"
 # include "operation.h"
+# include "advenced_operations.h"
 # include "pile.h"
 # include "display.h"
 # include "string_utils.h"

@@ -6,11 +6,12 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 18:50:53 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 17:49:00 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pile.h"
+#include <stdio.h> //
 
 t_pile	*create_block(int nbr)
 {

@@ -6,7 +6,7 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/13 23:02:03 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/01/14 16:53:20 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =     	push_swap.c \
 			list_util.c \
 			solver.c \
 			string_utils.c \
+			advenced_operations.c \
 
 OBJS = $(SRCS:.c=.o)
 

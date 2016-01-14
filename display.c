@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 16:33:45 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 22:55:34 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 17:58:42 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	print_piles(t_pile *pile_tab[])
 
 void	add_operation(t_pile *pile_tab[], char *flags, char **op_lst, char *op)
 {
-	if (ft_strchr(flags, 'v'))
-		print_piles(pile_tab);
 	if (ft_strchr(flags, 'c'))
 		put_oplist_colors(*op_lst, op);
-	if (**op_lst != '\0')
+	if (*op_lst != NULL)
 		*op_lst = ft_strjoin_free(*op_lst, ft_strdup(" "));
-	*op_lst = ft_strjoin_free(*op_lst, op);
+	*op_lst = ft_strjoin_free(*op_lst, ft_strdup(op));
 	if (ft_strchr(flags, 'c') == NULL)
-		ft_putstr(*op_lst);
+		ft_putendl(*op_lst);
+	if (ft_strchr(flags, 'v'))
+		print_piles(pile_tab);
 }

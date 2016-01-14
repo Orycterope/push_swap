@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 21:56:06 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 17:10:18 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		get_dist(t_pile *block1, t_pile *block2)
 {
 	int	dist;
 
+	if (block1 == NULL || block2 == NULL)
+		return (0);
 	dist = 0;
 	while (block1 != block2)
 	{
@@ -63,6 +65,7 @@ t_pile	*get_next_unsorted(t_pile *pile)
 	{
 		if (pile->value < pile->next->value)
 			return (pile);
+		pile = pile->next;
 	}
 	return (NULL);
 }
