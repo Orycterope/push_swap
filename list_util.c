@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 17:10:18 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/15 00:14:11 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,12 @@ int		get_dist(t_pile *block1, t_pile *block2)
 int		get_shortest_dist(t_pile *block1, t_pile *block2)
 {
 	int		dist;
+	int		size;
 
+	size = get_pile_size(block1);
 	dist = get_dist(block1, block2);
-	if (dist > get_pile_size(block1) / 2)
-		dist = -dist;
+	if (dist > size / 2)
+		dist = -(size - dist);
 	return (dist);
 }
 

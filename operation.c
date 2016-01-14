@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 20:03:19 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 21:55:17 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 22:33:23 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_pile	**operation_push(t_pile *pile_tab[], int to)
 
 t_pile	**do_rot_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
 {
+	if (op[0] == '\0')
+		return (pile_tab);
 	op++;
 	if (op[2] == 'r')
 	{

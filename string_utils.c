@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:25:15 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 21:52:21 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 22:32:09 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,21 @@ void		format_rot_str(char *op)
 {
 	char	cpy[4];
 
-	if (ft_strcmp(op, "rab"))
+	if (op[0] == '\0')
+		return ;
+	ft_putstr("got rotate str: ");
+	ft_putstr(op);
+	if (ft_strcmp(op, "rab") == 0)
 		ft_strcpy(op, "ra");
-	if (ft_strcmp(op, "arb"))
+	if (ft_strcmp(op, "arb") == 0)
 		ft_strcpy(op, "a");
-	if (ft_strcmp(op, "ab"))
+	if (ft_strcmp(op, "ab") == 0)
 		ft_strcpy(op, "r");
-	if (ft_strcmp(op, "rarb"))
+	if (ft_strcmp(op, "rarb") == 0)
 		ft_strcpy(op, "rr");
 	ft_strcpy(cpy, "r");
 	ft_strcat(cpy, op);
 	ft_strcpy(op, cpy);
+	ft_putstr(" and returned: ");
+	ft_putendl(op);
 }
