@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 17:56:00 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 19:02:20 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 	printf("next : %p, dist : %d\n", next, dist); //
 	if (next != NULL)
 	{
-		dist = get_pile_size(pile_tab[0]) - dist;
+		dist = get_pile_size(pile_tab[0]) - dist - 1;
 		printf("push_swapping %d blocks\n", dist); //
-		pile_tab = push_swap_n(pile_tab, op_lst, flags, dist); // should be dist from top
+		pile_tab = push_swap_n(pile_tab, op_lst, flags, dist, 1); // should be dist from top
 	}
 	else if (pile_tab[1] != NULL)
-		pile_tab = push_all_a(pile_tab, op_lst, flags);
+		pile_tab = push_swap_n(pile_tab, op_lst, flags, get_pile_size(pile_tab[1]) + 1, 0);
 	return (pile_tab);
 }
 

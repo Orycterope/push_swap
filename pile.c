@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 17:49:00 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 20:04:07 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_pile	*save_param_to_pile(int ac, char *av[], char *command)
 					&& !(ft_strchr("+-", (*av)[0]) != NULL && (*av)[1] == '0')))
 				display_usage(command);
 		pile = append_to_pile(value, pile);
+		pile = pile->previous;
 		av++;
 	}
 	return (pile);

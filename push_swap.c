@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 17:07:17 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 20:09:45 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int			main(int ac, char *av[])
 {
 	char	*flags;
 	char	*command;
+	char	*op_list;
 	t_pile	*pile_tab[2];
 
 	command = av[0];
@@ -74,7 +75,11 @@ int			main(int ac, char *av[])
 	pile_tab[1] = NULL;
 	if (ft_strchr(flags, 'v'))
 		print_piles(pile_tab);
-	ft_putstr(solve(pile_tab, flags));
+	op_list = solve(pile_tab, flags);
+	if (op_list == NULL)
+		ft_putendl("Already sorted");
+	else
+		ft_putendl(op_list);
 	//free_pile(pile_tab[0]);
 	return (0);
 }

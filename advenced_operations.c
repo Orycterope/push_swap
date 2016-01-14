@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:58:29 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 18:09:25 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 20:16:51 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,26 @@ t_pile	**check_for_swaps(t_pile *pile_tab[], char **op_lst, char *flags)
 	return (pile_tab);
 }
 
-t_pile	**push_swap_n(t_pile *pile_tab[], char **oplst, char *flags, int n)
+t_pile	**push_swap_n(t_pile *pile_tab[], char **op, char *flags, int n, int t)
 {
+	t_pile	*top;
 	ft_putendl("in push_swap_n");
-	n--;
 	while (--n && pile_tab[0] != NULL)
 	{
-		pile_tab = check_for_swaps(pile_tab, oplst, flags);
-		pile_tab = operation_push(pile_tab, 1);
-		add_operation(pile_tab, flags, oplst, "pb");
-	}
-	pile_tab = check_for_swaps(pile_tab, oplst, flags);
-	return (pile_tab);
-}
-
-t_pile	**push_all_a(t_pile *pile_tab[], char **oplst, char *flags)
-{
-	while (pile_tab[1] != NULL)
-	{
-		pile_tab = check_for_swaps(pile_tab, oplst, flags);
-		pile_tab = operation_push(pile_tab, 0);
-		add_operation(pile_tab, flags, oplst, "pa");
+		top = pile_tab[0]->previous;
+		if (n > 1 && top->value > top->previous->previous->value)
+			pile_tab = check_for_swaps(pile_tab, op, flags);
+		if (t == 0)
+		{
+			pile_tab = operation_push(pile_tab, 0);
+			add_operation(pile_tab, flags, op, "pa");
+		}
+		else
+		{
+			pile_tab = operation_push(pile_tab, 1);
+			add_operation(pile_tab, flags, op, "pb");
+		}
+		pile_tab = check_for_swaps(pile_tab, op, flags);
 	}
 	return (pile_tab);
 }
