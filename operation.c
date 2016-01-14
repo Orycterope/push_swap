@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 20:03:19 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 21:57:06 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 21:55:17 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,30 @@ t_pile	**operation_push(t_pile *pile_tab[], int to)
 		pile_tab[0] = remove_from_pile(block);
 	}
 	//free(block);
+	return (pile_tab);
+}
+
+t_pile	**do_rot_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
+{
+	op++;
+	if (op[2] == 'r')
+	{
+		pile_tab[0] = operation_rotate(pile_tab[0], -1);
+		pile_tab[1] = operation_rotate(pile_tab[1], -1);
+	}
+	else if (op[1] == 'r' && op[2] == '\0')
+	{
+		pile_tab[0] = operation_rotate(pile_tab[0], 1);
+		pile_tab[1] = operation_rotate(pile_tab[1], 1);
+	}
+	else if (op[0] == 'a')
+		pile_tab[0] = operation_rotate(pile_tab[0], 1);
+	else if (op[0] == 'r' && op[1] == 'a')
+		pile_tab[0] = operation_rotate(pile_tab[0], -1);
+	else if (op[0] == 'b')
+		pile_tab[1] = operation_rotate(pile_tab[1], 1);
+	else if (op[0] == 'r' && op[1] == 'b')
+		pile_tab[1] = operation_rotate(pile_tab[1], -1);
+	add_operation(pile_tab, flags, op_lst, --op);
 	return (pile_tab);
 }

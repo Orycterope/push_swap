@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:25:15 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 19:41:48 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/14 21:52:21 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,21 @@ void		put_oplist_colors(char *op_list, char *last_op)
 	print_op_color(last_op);
 	ft_putstr(last_op);
 	ft_putstr("\e[0m\n");
+}
+
+void		format_rot_str(char *op)
+{
+	char	cpy[4];
+
+	if (ft_strcmp(op, "rab"))
+		ft_strcpy(op, "ra");
+	if (ft_strcmp(op, "arb"))
+		ft_strcpy(op, "a");
+	if (ft_strcmp(op, "ab"))
+		ft_strcpy(op, "r");
+	if (ft_strcmp(op, "rarb"))
+		ft_strcpy(op, "rr");
+	ft_strcpy(cpy, "r");
+	ft_strcat(cpy, op);
+	ft_strcpy(op, cpy);
 }
