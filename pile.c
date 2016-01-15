@@ -13,6 +13,15 @@
 #include "pile.h"
 #include <stdio.h> //
 
+t_pile	*get_block_at(int rang, t_pile *pile)
+{
+	if (pile == NULL)
+		return (NULL);
+	while (rang--)
+		pile = pile->next;
+	return (pile);
+}
+
 t_pile	*create_block(int nbr)
 {
 	t_pile	*block;

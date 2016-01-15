@@ -27,12 +27,11 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-#libft:
-#	echo "hey"
-#	make -C libft all
+libft:
+	make -C libft all
 
 $(NAME): $(OBJS)
-	gcc -I libft -L libft -lft -o $(NAME) $(OBJS)
+	gcc -I libft $(OBJS) -L libft -lft -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -43,4 +42,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft

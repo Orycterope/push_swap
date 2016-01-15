@@ -73,8 +73,6 @@ SRCS =     ft_memset.c \
     ft_lstiter.c \
     ft_lstmap.c \
 
-.SILENT:
-
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

@@ -98,20 +98,26 @@ t_pile	**rotate_swap_n(t_pile *pile_tab[], char **op, char *flags, int n)
 	int		p;
 	t_pile	*top;
 
-	//if (n < get_pile_size(pile_tab[0]) / 2)
-	//	return pile_tab;
 	p = n;
+	printf("rotate_swap %d blocks\n", n);
 	while (n--)
 	{
 		pile_tab = do_rot_op("rra", pile_tab, op, flags);
 		top = pile_tab[0]->previous;
-		if (top->previous->value > top->value)
+		if (p != n + 1 && top->previous->value < top->value)
 		{
 			pile_tab[0] = operation_swap(pile_tab[0]);
 			add_operation(pile_tab, flags, op, "sa");
 		}
 	}
-	while (--p)
+	while (p--)
+	{
 		pile_tab = do_rot_op("ra", pile_tab, op, flags);
+		if (p != 1 && pile_tab[0]->previous->previous->value < pile_tab[0]->previous->value)
+		{
+			pile_tab[0] = operation_swap(pile_tab[0]);
+			add_operation(pile_tab, flags, op, "sa");
+		}
+	}
 	return (pile_tab);
 }

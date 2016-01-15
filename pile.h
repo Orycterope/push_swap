@@ -21,6 +21,7 @@ typedef struct		s_pile
 	int				value;
 }					t_pile;
 
+t_pile			*get_block_at(int rang, t_pile *pile);
 t_pile			*create_block(int nbr);
 t_pile			*save_param_to_pile(int ac, char *av[], char *command);
 t_pile			*append_to_pile(int nbr, t_pile *pile);

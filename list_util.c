@@ -62,12 +62,13 @@ t_pile	*get_next_unsorted(t_pile *pile)
 
 	if (pile == NULL)
 		return (NULL);
+	pile = pile->previous;
 	start = pile;
-	while (pile->next != start)
+	while (pile->previous != start)
 	{
-		if (pile->value < pile->next->value)
+		if (pile->value > pile->previous->value)
 			return (pile);
-		pile = pile->next;
+		pile = pile->previous;
 	}
 	return (NULL);
 }
