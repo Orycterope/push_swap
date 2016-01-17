@@ -13,7 +13,7 @@
 #include "pile.h"
 #include <stdio.h> //
 
-t_pile	*get_block_at(int rang, t_pile *pile)
+t_pile	*get_block_at(int rang, t_pile *pile) // not used anymore
 {
 	if (pile == NULL)
 		return (NULL);

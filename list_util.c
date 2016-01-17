@@ -72,3 +72,20 @@ t_pile	*get_next_unsorted(t_pile *pile)
 	}
 	return (NULL);
 }
+
+int		get_rank_of(t_pile *pile)
+{
+	t_pile	*start;
+	int		rank;
+
+	start = pile;
+	rank = 0;
+	pile = pile->next;
+	while (pile != start)
+	{
+		if (pile->value < start->value)
+			rank++;
+		pile = pile->next;
+	}
+	return (rank);
+}

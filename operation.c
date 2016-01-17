@@ -58,7 +58,6 @@ t_pile	**operation_push(t_pile *pile_tab[], int to)
 		pile_tab[1] = append_to_pile(block->value, pile_tab[1]);
 		pile_tab[0] = remove_from_pile(block);
 	}
-	//free(block);
 	return (pile_tab);
 }
 
