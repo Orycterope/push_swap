@@ -19,5 +19,6 @@ int		get_dist(t_pile *block1, t_pile *block2);
 int		get_shortest_dist(t_pile *block1, t_pile *block2);
 t_pile	*get_next_unsorted(t_pile *pile);
 int		get_rank_of(t_pile *pile);
+int		is_rotate_sorted(t_pile *pile);
 
 #endif

@@ -44,7 +44,7 @@ int		get_dist(t_pile *block1, t_pile *block2)
 	return (dist);
 }
 
-int		get_shortest_dist(t_pile *block1, t_pile *block2)
+int		get_shortest_dist(t_pile *block1, t_pile *block2) // used ?
 {
 	int		dist;
 	int		size;
@@ -71,6 +71,24 @@ t_pile	*get_next_unsorted(t_pile *pile)
 		pile = pile->previous;
 	}
 	return (NULL);
+}
+
+int		is_rotate_sorted(t_pile *pile)
+{
+	t_pile	*start;
+	int		loop;
+
+	if (pile == NULL)
+		return (1);
+	start = pile;
+	loop = 0;
+	while (pile != start || loop++ == 0)
+	{
+		if (get_next_unsorted(pile) == NULL)
+			return (loop);
+		pile = pile->next;
+	}
+	return (0);
 }
 
 int		get_rank_of(t_pile *pile) //used ?

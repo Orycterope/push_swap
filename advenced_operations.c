@@ -51,7 +51,12 @@ t_pile	**check_for_rotate(t_pile *pile_tab[], char **op_lst, char *flags)
 	{
 		op[0] = '\0';
 		if (pile_tab[0] != NULL && (top = pile_tab[0]->previous)
+				&& get_rank_of(pile_tab[0]) == 0
+				&& !(get_rank_of(top) == get_pile_size(pile_tab[0]) - 1))
+			ft_strcpy(op, "ra");
+		else if (pile_tab[0] != NULL && (top = pile_tab[0]->previous)
 				&& get_rank_of(pile_tab[0]) < get_rank_of(top))
+			//	&& get_rank_of(pile_tab[0]) < get_pile_size(pile_tab[0]) / 2)
 		{
 			/*if (get_rank_of(top) < get_rank_of(top->previous) && get_rank_of(top->previous) < get_pile_size(pile_tab[0]))
 			{
@@ -64,6 +69,10 @@ t_pile	**check_for_rotate(t_pile *pile_tab[], char **op_lst, char *flags)
 				&& pile_tab[0]->value > top->value)
 			ft_strcpy(op, "ra");*/
 		if (pile_tab[1] != NULL && (top = pile_tab[1]->previous)
+				&& get_rank_of(pile_tab[1]) + 1 == get_pile_size(pile_tab[1])
+				&& !(get_rank_of(top) == 0))
+			ft_strcpy(op, "rb");
+		else if (pile_tab[1] != NULL && (top = pile_tab[1]->previous)
 				&& get_rank_of(pile_tab[1]) > get_rank_of(top))
 		{
 			/*if (get_rank_of(pile_tab[1]) > get_rank_of(top->previous))
@@ -117,7 +126,7 @@ t_pile	**rotate_swap_n(t_pile *pile_tab[], char **op, char *flags, int n)
 	p = n;
 	printf("rotate_swap %d blocks\n", n);
 	top = pile_tab[0]->previous;
-	while (n-- && get_next_unsorted(pile_tab[0]))
+	while (n-- && !is_rotate_sorted(pile_tab[0])) // is sorted top !
 	{
 		pile_tab = do_rot_op("rra", pile_tab, op, flags);
 		if (n != p - 1 && (pile_tab[0]->previous->value < top->value
@@ -127,6 +136,8 @@ t_pile	**rotate_swap_n(t_pile *pile_tab[], char **op, char *flags, int n)
 		{
 			pile_tab[0] = operation_swap(pile_tab[0]);
 			add_operation(pile_tab, flags, op, "sa");
+			if (pile_tab[0]->previous->previous->value < top->value)
+				top = pile_tab[0]->previous->previous;
 		}
 	}
 	while (p-- && get_next_unsorted(pile_tab[0]))
