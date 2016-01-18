@@ -24,7 +24,7 @@ void	*ft_memalloc(size_t size)
 		exit(1);
 	}
 	c = 0;
-	while (c <= size)
+	while (c < size)
 		ptr[c++] = 0;
 	return ((void*)ptr);
 }

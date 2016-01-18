@@ -72,7 +72,9 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 	next = get_next_unsorted(pile_tab[0]);
 	dist = get_dist(pile_tab[0], next);
 	//printf("next : %d at %p, dist : %d\n", next->value, next, dist); //
+	//if (next != NULL && dist + 1 < size / 2)
 	if (next != NULL && dist + 1 < size / 2)
+	//if (next != NULL && get_rank_of(next) > size / 2)
 	{
 		dist = get_rot_nbr(pile_tab[0]);
 		pile_tab = rotate_swap_n(pile_tab, op_lst, flags, dist);

@@ -27,6 +27,7 @@ t_pile	*create_block(int nbr)
 	t_pile	*block;
 
 	block = (t_pile*)ft_memalloc(sizeof(t_pile));
+//	block = (t_pile*)malloc(sizeof(t_pile));
 	block->value = nbr;
 	block->previous = block;
 	block->next = block;

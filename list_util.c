@@ -73,7 +73,7 @@ t_pile	*get_next_unsorted(t_pile *pile)
 	return (NULL);
 }
 
-int		get_rank_of(t_pile *pile)
+int		get_rank_of(t_pile *pile) //used ?
 {
 	t_pile	*start;
 	int		rank;

@@ -21,5 +21,6 @@
 # include "list_util.h"
 
 char	*solve(t_pile *pile_tab[], char *flags);
+int		get_rot_nbr(t_pile *pile);
 
 #endif

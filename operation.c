@@ -65,7 +65,6 @@ t_pile	**do_rot_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	if (op[0] == '\0')
 		return (pile_tab);
-	op++;
 	if (op[2] == 'r')
 	{
 		pile_tab[0] = operation_rotate(pile_tab[0], -1);
@@ -76,14 +75,14 @@ t_pile	**do_rot_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
 		pile_tab[0] = operation_rotate(pile_tab[0], 1);
 		pile_tab[1] = operation_rotate(pile_tab[1], 1);
 	}
-	else if (op[0] == 'a')
+	else if (op[1] == 'a')
 		pile_tab[0] = operation_rotate(pile_tab[0], 1);
-	else if (op[0] == 'r' && op[1] == 'a')
+	else if (op[1] == 'r' && op[2] == 'a')
 		pile_tab[0] = operation_rotate(pile_tab[0], -1);
-	else if (op[0] == 'b')
+	else if (op[1] == 'b')
 		pile_tab[1] = operation_rotate(pile_tab[1], 1);
-	else if (op[0] == 'r' && op[1] == 'b')
+	else if (op[1] == 'r' && op[2] == 'b')
 		pile_tab[1] = operation_rotate(pile_tab[1], -1);
-	add_operation(pile_tab, flags, op_lst, --op);
+	add_operation(pile_tab, flags, op_lst, op);
 	return (pile_tab);
 }
