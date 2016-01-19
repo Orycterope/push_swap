@@ -126,7 +126,7 @@ t_pile	**rotate_swap_n(t_pile *pile_tab[], char **op, char *flags, int n)
 	p = n;
 	printf("rotate_swap %d blocks\n", n);
 	top = pile_tab[0]->previous;
-	while (n-- && !is_rotate_sorted(pile_tab[0])) // is sorted top !
+	while (n-- && get_next_unsorted(top->next)) // is sorted top !
 	{
 		pile_tab = do_rot_op("rra", pile_tab, op, flags);
 		if (n != p - 1 && (pile_tab[0]->previous->value < top->value
@@ -136,8 +136,8 @@ t_pile	**rotate_swap_n(t_pile *pile_tab[], char **op, char *flags, int n)
 		{
 			pile_tab[0] = operation_swap(pile_tab[0]);
 			add_operation(pile_tab, flags, op, "sa");
-			if (pile_tab[0]->previous->previous->value < top->value)
-				top = pile_tab[0]->previous->previous;
+			if (top->next->value < top->value)
+				top = top->next;
 		}
 	}
 	while (p-- && get_next_unsorted(pile_tab[0]))
