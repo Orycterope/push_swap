@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:25:15 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 22:32:09 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:49:29 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_op_color(char *op)
 {
-	ft_putstr("\e[");
+	ft_putstr("\x1B[");
 	if (op[0] == 'r')
 		ft_putchar('4');
 	else
@@ -38,7 +38,7 @@ void		put_oplist_colors(char *op_list, char *last_op)
 	}
 	print_op_color(last_op);
 	ft_putstr(last_op);
-	ft_putstr("\e[0m\n");
+	ft_putstr("\x1B[0m\n");
 }
 
 void		format_rot_str(char *op)
