@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:21:28 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/13 19:23:39 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:01:29 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ typedef struct		s_pile
 	int				value;
 }					t_pile;
 
-t_pile			*get_block_at(int rang, t_pile *pile);
-t_pile			*create_block(int nbr);
-t_pile			*save_param_to_pile(int ac, char *av[], char *command);
-t_pile			*append_to_pile(int nbr, t_pile *pile);
-t_pile			*remove_from_pile(t_pile *maillon);
-void			display_usage(char *command);
+t_pile				*create_block(int nbr);
+t_pile				*save_param_to_pile(int ac, char *av[], char *command);
+t_pile				*append_to_pile(int nbr, t_pile *pile);
+t_pile				*remove_from_pile(t_pile *maillon);
+void				display_usage(char *command);
 
 #endif

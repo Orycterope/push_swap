@@ -6,20 +6,11 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/22 20:08:11 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 21:00:58 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pile.h"
-
-t_pile	*get_block_at(int rang, t_pile *pile) // not used anymore
-{
-	if (pile == NULL)
-		return (NULL);
-	while (rang--)
-		pile = pile->next;
-	return (pile);
-}
 
 t_pile	*create_block(int nbr)
 {
@@ -70,8 +61,8 @@ t_pile	*save_param_to_pile(int ac, char *av[], char *command)
 	{
 		value = ft_atoi(av[0]);
 		if (value == 0 && ((*av)[0] != '0'
-					&& !(ft_strchr("+-", (*av)[0]) != NULL && (*av)[1] == '0')))
-				display_usage(command);
+				&& !(ft_strchr("+-", (*av)[0]) != NULL && (*av)[1] == '0')))
+			display_usage(command);
 		pile = append_to_pile(value, pile);
 		pile = pile->previous;
 		av++;
