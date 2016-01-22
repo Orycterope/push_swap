@@ -6,36 +6,11 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/15 00:05:58 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 20:50:20 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
-#include <stdio.h> //
-
-/*t_pile	*get_inferior_block(t_pile *block)
-{
-	t_pile	*start;
-	int		reference;
-	int		best;
-	int		init;
-
-	if (block == NULL)
-		return (NULL);
-	best = reference = block->value;
-	start = block;
-	init = 0;
-	while (block->next != start)
-	{
-		block = block->next;
-		best = (init++ == 0 || (block->value < reference
-				&& block->value > best)) ? block->value : best;
-	}
-	while (block->value != best)
-		block = block->next;
-	printf("reference : %d, inferior : %d at %p\n", reference, block->value, block);
-	return (block);
-}*/
 
 int		get_rot_nbr(t_pile *pile)
 {
@@ -68,43 +43,30 @@ t_pile	**reverse_rot_swp(t_pile *tab[], char **oplst, char *flags)
 
 	n = 0;
 	top = tab[0]->previous;
-	if (get_rank_of(top) >= get_pile_size(tab[0]) / 2 && top->value < tab[0]->value)
+	if (get_rank_of(top) >= get_pile_size(tab[0]) / 2
+			&& top->value < tab[0]->value)
 		n++;
-	if (get_rank_of(top->previous) >= get_pile_size(tab[0]) / 2 && top->previous->value < tab[0]->value)
+	if (get_rank_of(top->previous) >= get_pile_size(tab[0]) / 2
+			&& top->previous->value < tab[0]->value)
 		n++;
 	if ((n == 1 && top->value < top->previous->value)
-		|| (n == 2 && top->value > top->previous->value))
-	{
-		tab[0] = operation_swap(tab[0]);
-		add_operation(tab, flags, oplst, "sa");
-	}
+			|| (n == 2 && top->value > top->previous->value))
+		tab = do_swap_op("sa", tab, oplst, flags);
 	if (n > 0)
-	{
 		tab = do_rot_op("rra", tab, oplst, flags);
-		while (n--)
-		{
-			tab[0] = operation_swap(tab[0]);
-			add_operation(tab, flags, oplst, "sa");
-			tab = do_rot_op("ra", tab, oplst, flags);
-		}
-	}
 	return (tab);
 }
 
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	t_pile	*next;
- 	int		dist;
+	int		dist;
 	int		size;
 
-	ft_putendl("in chooser"); //
 	size = get_pile_size(pile_tab[0]);
 	next = get_next_unsorted(pile_tab[0]);
 	dist = get_dist(pile_tab[0], next);
-	//printf("next : %d at %p, dist : %d\n", next->value, next, dist); //
-	//if (next != NULL && dist + 1 < size / 2)
 	if (next != NULL && dist + 1 < size / 2)
-	//if (next != NULL && get_rank_of(next) > size / 2)
 	{
 		dist = get_rot_nbr(pile_tab[0]);
 		pile_tab = rotate_swap_n(pile_tab, op_lst, flags, dist);
@@ -112,13 +74,9 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 	if (size > 3)
 		pile_tab = reverse_rot_swp(pile_tab, op_lst, flags);
 	if (next != NULL)
-	{
-		dist = get_dist(next, pile_tab[0]->previous) + 1;
-		printf("push_swapping %d blocks\n", dist); //
-		pile_tab = push_swap_n(pile_tab, op_lst, flags, dist, 1); // should be dist from top
-	}
+		pile_tab = push_swap(pile_tab, op_lst, flags, 1);
 	else if (pile_tab[1] != NULL)
-		pile_tab = push_swap_n(pile_tab, op_lst, flags, get_pile_size(pile_tab[1]) + 1, 0);
+		pile_tab = push_swap(pile_tab, op_lst, flags, 0);
 	return (pile_tab);
 }
 
@@ -127,11 +85,7 @@ char	*solve(t_pile *pile_tab[], char *flags)
 	char	*op_lst;
 
 	op_lst = NULL;
-	ft_putendl("start solving");
 	while (pile_tab[1] != NULL || get_next_unsorted(pile_tab[0]) != NULL)
-	{
 		pile_tab = choose_op(pile_tab, &op_lst, flags);
-	}
-	ft_putendl("stopped solving");
 	return (op_lst);
 }

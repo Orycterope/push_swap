@@ -6,12 +6,11 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 20:09:45 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 20:09:19 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> //
 
 void		display_usage(char *command)
 {
@@ -70,7 +69,6 @@ int			main(int ac, char *av[])
 	flags = get_flags(&ac, &av);
 	if (ac < 1)
 		display_usage(command);
-	printf("flags : %s, first arg: %s, ac: %d\n", flags, av[0], ac);
 	pile_tab[0] = save_param_to_pile(ac, av, command);
 	pile_tab[1] = NULL;
 	if (ft_strchr(flags, 'v'))
@@ -80,6 +78,5 @@ int			main(int ac, char *av[])
 		ft_putendl("Already sorted");
 	else
 		ft_putendl(op_list);
-	//free_pile(pile_tab[0]);
 	return (0);
 }

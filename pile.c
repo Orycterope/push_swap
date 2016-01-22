@@ -6,12 +6,11 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/14 20:04:07 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 20:08:11 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pile.h"
-#include <stdio.h> //
 
 t_pile	*get_block_at(int rang, t_pile *pile) // not used anymore
 {
@@ -27,7 +26,6 @@ t_pile	*create_block(int nbr)
 	t_pile	*block;
 
 	block = (t_pile*)ft_memalloc(sizeof(t_pile));
-//	block = (t_pile*)malloc(sizeof(t_pile));
 	block->value = nbr;
 	block->previous = block;
 	block->next = block;

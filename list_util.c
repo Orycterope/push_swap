@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/15 00:14:11 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/01/22 20:18:47 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ int		get_dist(t_pile *block1, t_pile *block2)
 		block1 = block1->next;
 		dist++;
 	}
-	return (dist);
-}
-
-int		get_shortest_dist(t_pile *block1, t_pile *block2) // used ?
-{
-	int		dist;
-	int		size;
-
-	size = get_pile_size(block1);
-	dist = get_dist(block1, block2);
-	if (dist > size / 2)
-		dist = -(size - dist);
 	return (dist);
 }
 
@@ -91,7 +79,7 @@ int		is_rotate_sorted(t_pile *pile)
 	return (0);
 }
 
-int		get_rank_of(t_pile *pile) //used ?
+int		get_rank_of(t_pile *pile)
 {
 	t_pile	*start;
 	int		rank;
