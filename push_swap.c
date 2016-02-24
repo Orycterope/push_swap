@@ -56,6 +56,26 @@ static char	*get_flags(int *ac, char **av[])
 	return (flags);
 }
 
+int			has_duplicate(int ac, char *av[])
+{
+	int	i;
+
+	while (ac != 0)
+	{
+		i = 1;
+		while (i != ac)
+		{
+			if (ft_strcmp(av[0], av[i]) == 0)
+				return (1);
+			i++;
+		}
+		ac--;
+		av++;
+	}
+	return (0);
+}
+
+
 int			main(int ac, char *av[])
 {
 	char	*flags;
@@ -68,6 +88,8 @@ int			main(int ac, char *av[])
 		display_usage(command);
 	flags = get_flags(&ac, &av);
 	if (ac < 1)
+		display_usage(command);
+	if (has_duplicate(ac, av))
 		display_usage(command);
 	pile_tab[0] = save_param_to_pile(ac, av, command);
 	pile_tab[1] = NULL;
