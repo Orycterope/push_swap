@@ -12,71 +12,52 @@
 
 #include "solver.h"
 
-int		get_rot_nbr(t_pile *pile)
+int		get_sorted_amount(t_pile *pile) //, int sens)
 {
 	int		size;
-	t_pile	*b;
-	t_pile	*middle;
+	int		rank;
+	int		out;
 
-	size = get_pile_size(pile) / 2;
-	middle = pile;
-	while (size--)
-		middle = middle->next;
-	while (middle != pile)
+	size = get_pile_size(pile);
+	out = 0;
+	rank = 0;
+	while (pile != NULL && rank != size)
 	{
-		b = middle;
-		while (b != pile->previous)
-		{
-			if (b->value < middle->value)
-				return (get_dist(pile, middle) + 1);
-			b = b->previous;
-		}
-		middle = middle->previous;
+		if (get_rank_of(pile) == rank)
+			out += rank;
+		if (get_rank_of(pile->next) == rank + 1)
+			out *= rank;
+		rank++;
+		pile = pile->next;
 	}
-	return (0);
-}
-
-t_pile	**reverse_rot_swp(t_pile *tab[], char **oplst, char *flags)
-{
-	int		n;
-	t_pile	*top;
-
-	n = 0;
-	top = tab[0]->previous;
-	if (get_rank_of(top) >= get_pile_size(tab[0]) / 2
-			&& top->value < tab[0]->value)
-		n++;
-	if (get_rank_of(top->previous) >= get_pile_size(tab[0]) / 2
-			&& top->previous->value < tab[0]->value)
-		n++;
-	if ((n == 1 && top->value < top->previous->value)
-			|| (n == 2 && top->value > top->previous->value))
-		tab = do_swap_op("sa", tab, oplst, flags);
-	if (n > 0)
-		tab = do_rot_op("rra", tab, oplst, flags);
-	return (tab);
+	return (out);
 }
 
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 {
-	t_pile	*next;
-	int		dist;
-	int		size;
+	const char	*best_op;
+	char		*operations[] = {"sa", "sb", "ss", "ra", "rb", "rra", "rrb", "rr", "rrr", NULL };
+	char		*reverse_op[] = {"sa", "sb", "ss", "rra", "rrb", "ra", "rb", "rrr", "rr", NULL };
+	int			best_value;
+	int			current_value; // not so useful
+	int			i;
 
-	size = get_pile_size(pile_tab[0]);
-	next = get_next_unsorted(pile_tab[0]);
-	dist = get_dist(pile_tab[0], next);
-	if (next != NULL && dist + 1 < size / 2)
+	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
+	best_op = "sa";
+	best_value = get_sorted_amount(pile_tab[0]);
+	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
+
+	i = 0;
+	while (operations[i] != NULL)
 	{
-		dist = get_rot_nbr(pile_tab[0]);
-		pile_tab = rotate_swap_n(pile_tab, op_lst, flags, dist);
+		pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
+		current_value = get_sorted_amount(pile_tab[0]);
+		best_op = (current_value > best_value) ? operations[i] : best_op;
+		best_value = (current_value > best_value) ? current_value : best_value;
+		pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);
+		i++;
 	}
-	if (size > 3)
-		pile_tab = reverse_rot_swp(pile_tab, op_lst, flags);
-	if (next != NULL)
-		pile_tab = push_swap(pile_tab, op_lst, flags, 1);
-	else if (pile_tab[1] != NULL)
-		pile_tab = push_swap(pile_tab, op_lst, flags, 0);
+	pile_tab = do_operation((char *)best_op, pile_tab, op_lst, flags);
 	return (pile_tab);
 }
 

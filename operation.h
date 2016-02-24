@@ -20,5 +20,6 @@ t_pile	*operation_rotate(t_pile *pile, int sens);
 t_pile	**operation_push(t_pile *pile_tab[], int to);
 t_pile	**do_rot_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags);
 t_pile	**do_swap_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags);
+t_pile	**do_operation(char *op, t_pile *pile_tab[], char **op_lst, char *flags);
 
 #endif
