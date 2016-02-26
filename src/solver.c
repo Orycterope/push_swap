@@ -12,25 +12,34 @@
 
 #include "solver.h"
 
-int		get_sorted_amount(t_pile *pile) //, int sens)
+int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 {
 	int		size;
 	int		rank;
 	int		out;
 
+	if (pile == NULL)
+		return (0);
 	size = get_pile_size(pile);
 	out = 0;
-	rank = 0;
-	while (pile != NULL && rank != size)
+	rank = (sens == 1) ? 1 : size;
+	while ((sens == 1 && rank != size) || (sens == -1 && rank != 0))
 	{
 		if (get_rank_of(pile) == rank)
 			out += rank;
-		if (get_rank_of(pile->next) == rank + 1)
+		if ((sens == 1 && get_rank_of(pile->next) == rank + 1)
+				|| (sens == -1 && get_rank_of(pile->next) == rank - 1))
 			out *= rank;
-		rank++;
+		rank += sens;
 		pile = pile->next;
 	}
 	return (out);
+}
+
+int		get_sorted_amount(t_pile *pile_tab[])
+{
+	return (get_sorted_amount_of_pile(pile_tab[0], 1)
+		+ get_sorted_amount_of_pile(pile_tab[1], -1) / 2);
 }
 
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
@@ -44,14 +53,14 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 
 	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
 	best_op = "sa";
-	best_value = get_sorted_amount(pile_tab[0]);
+	best_value = get_sorted_amount(pile_tab);
 	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
 
 	i = 0;
 	while (operations[i] != NULL)
 	{
 		pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
-		current_value = get_sorted_amount(pile_tab[0]);
+		current_value = get_sorted_amount(pile_tab);
 		best_op = (current_value > best_value) ? operations[i] : best_op;
 		best_value = (current_value > best_value) ? current_value : best_value;
 		pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);

@@ -30,7 +30,6 @@ SRC_NAME =	push_swap.c \
 			list_util.c \
 			solver.c \
 			string_utils.c \
-			advenced_operations.c \
 
 LIBFT_NAME =    ft_memset.c \
 		    	ft_bzero.c \
