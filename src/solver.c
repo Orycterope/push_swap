@@ -22,15 +22,15 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 		return (0);
 	size = get_pile_size(pile);
 	out = 0;
-	rank = (sens == 1) ? 1 : size;
-	while ((sens == 1 && rank != size) || (sens == -1 && rank != 0))
+	rank = (sens == 1) ? size : 1;
+	while ((sens == 1 && rank != 0) || (sens == -1 && rank != size))
 	{
 		if (get_rank_of(pile) == rank)
 			out += rank;
-		if ((sens == 1 && get_rank_of(pile->next) == rank + 1)
-				|| (sens == -1 && get_rank_of(pile->next) == rank - 1))
-			out *= rank;
-		rank += sens;
+		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
+				|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
+			out += get_rank_of(pile) + get_rank_of(pile->next);
+		rank -= sens;
 		pile = pile->next;
 	}
 	return (out);
@@ -56,15 +56,16 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 	best_value = get_sorted_amount(pile_tab);
 	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
 
-	i = 0;
-	while (operations[i] != NULL)
+	i = -1;
+	while (operations[++i] != NULL)
 	{
+		if (pile_tab[1] == NULL && (operations[i][1] == 'b' || operations[i][2] == 'b'))
+			continue ;
 		pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
 		current_value = get_sorted_amount(pile_tab);
 		best_op = (current_value > best_value) ? operations[i] : best_op;
 		best_value = (current_value > best_value) ? current_value : best_value;
 		pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);
-		i++;
 	}
 	pile_tab = do_operation((char *)best_op, pile_tab, op_lst, flags);
 	return (pile_tab);

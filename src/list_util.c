@@ -93,5 +93,5 @@ int		get_rank_of(t_pile *pile)
 			rank++;
 		pile = pile->next;
 	}
-	return (rank);
+	return (rank + 1);
 }
