@@ -6,16 +6,24 @@
 #    By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/18 19:13:31 by tvermeil          #+#    #+#              #
-#    Updated: 2016/01/22 20:00:03 by tvermeil         ###   ########.fr        #
+#    Updated: 2016/02/10 21:26:58 by tvermeil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = gcc
-CFLAGS += -Wall -Wextra -Werror -I .
-LDFLAGS += -L. -lft
+CPPFLAGS = -I include
+CFLAGS = -Wall -Wextra -Werror -g
+LDFLAGS = -L.
+LDLIBS = -lft
 
-SRCS =     	push_swap.c \
+SRC_PATH = src
+INC_PATH = include
+OBJ_PATH = obj/$(NAME)
+LIBFT_SRC_PATH = libft
+LIBFT_OBJ_PATH = obj/libft
+
+SRC_NAME =	push_swap.c \
 			pile.c \
 			operation.c \
 			display.c \
@@ -24,85 +32,102 @@ SRCS =     	push_swap.c \
 			string_utils.c \
 			advenced_operations.c \
 
-LIBFT_SRCS =    libft/ft_memset.c \
-				libft/ft_bzero.c \
-   				libft/ft_memcpy.c \
-   				libft/ft_memccpy.c \
-   				libft/ft_memmove.c \
-   				libft/ft_memchr.c \
-   				libft/ft_memcmp.c \
-   				libft/ft_strlen.c \
-   				libft/ft_strdup.c \
-   				libft/ft_strcpy.c \
-   				libft/ft_strncpy.c \
-   				libft/ft_strcat.c \
-   				libft/ft_strncat.c \
-   				libft/ft_strlcat.c \
-   				libft/ft_strchr.c \
-   				libft/ft_strrchr.c \
-   				libft/ft_strstr.c \
-   				libft/ft_strnstr.c \
-   				libft/ft_strcmp.c \
-   				libft/ft_strncmp.c \
-   				libft/ft_atoi.c \
-   				libft/ft_isalpha.c \
-   				libft/ft_isdigit.c \
-   				libft/ft_isalnum.c \
-   				libft/ft_isascii.c \
-   				libft/ft_isprint.c \
-   				libft/ft_toupper.c \
-   				libft/ft_tolower.c \
-   				libft/ft_memalloc.c \
-   				libft/ft_memdel.c \
-   				libft/ft_strnew.c \
-   				libft/ft_strdel.c \
-   				libft/ft_strclr.c \
-   				libft/ft_striter.c \
-   				libft/ft_striteri.c \
-   				libft/ft_strmap.c \
-   				libft/ft_strmapi.c \
-   				libft/ft_strequ.c \
-   				libft/ft_strnequ.c \
-   				libft/ft_strsub.c \
-   				libft/ft_strjoin.c \
-   				libft/ft_strjoin_free.c \
-   				libft/ft_strtrim.c \
-   				libft/ft_strsplit.c \
-   				libft/ft_itoa.c \
-   				libft/ft_putchar.c \
-   				libft/ft_putstr.c \
-   				libft/ft_putendl.c \
-   				libft/ft_putnbr.c \
-   				libft/ft_putchar_fd.c \
-   				libft/ft_putstr_fd.c \
-   				libft/ft_putendl_fd.c \
-   				libft/ft_putnbr_fd.c \
-   				libft/ft_lstnew.c \
-   				libft/ft_lstdelone.c \
-   				libft/ft_lstdel.c \
-   				libft/ft_lstadd.c \
-   				libft/ft_lstiter.c \
-   				libft/ft_lstmap.c \
+LIBFT_NAME =    ft_memset.c \
+		    	ft_bzero.c \
+   		    	ft_memcpy.c \
+   		    	ft_memccpy.c \
+   		    	ft_memmove.c \
+   		    	ft_memchr.c \
+   		    	ft_memcmp.c \
+   		    	ft_strlen.c \
+   		    	ft_strdup.c \
+   		    	ft_strcpy.c \
+   		    	ft_strncpy.c \
+   		    	ft_strcat.c \
+   		    	ft_strncat.c \
+   		    	ft_strlcat.c \
+   		    	ft_strchr.c \
+   		    	ft_strrchr.c \
+   		    	ft_strstr.c \
+   		    	ft_strnstr.c \
+   		    	ft_strcmp.c \
+   		    	ft_strncmp.c \
+   		    	ft_atoi.c \
+   		    	ft_isalpha.c \
+   		    	ft_isdigit.c \
+   		    	ft_isalnum.c \
+   		    	ft_isascii.c \
+   		    	ft_isprint.c \
+   		    	ft_toupper.c \
+   		    	ft_tolower.c \
+   		    	ft_memalloc.c \
+   		    	ft_memdel.c \
+   		    	ft_strnew.c \
+   		    	ft_strdel.c \
+   		    	ft_strclr.c \
+   		    	ft_striter.c \
+   		    	ft_striteri.c \
+   		    	ft_strmap.c \
+   		    	ft_strmapi.c \
+   		    	ft_strequ.c \
+   		    	ft_strnequ.c \
+   		    	ft_strsub.c \
+   		    	ft_strjoin.c \
+   		    	ft_strjoin_free.c \
+   		    	ft_strtrim.c \
+   		    	ft_strsplit.c \
+   		    	ft_itoa.c \
+   		    	ft_putchar.c \
+   		    	ft_putstr.c \
+   		    	ft_putendl.c \
+   		    	ft_putnbr.c \
+   		    	ft_putchar_fd.c \
+   		    	ft_putstr_fd.c \
+   		    	ft_putendl_fd.c \
+   		    	ft_putnbr_fd.c \
+   		    	ft_lstnew.c \
+   		    	ft_lstdelone.c \
+   		    	ft_lstdel.c \
+   		    	ft_lstadd.c \
+   		    	ft_lstiter.c \
+   		    	ft_lstmap.c \
 
-OBJS = $(SRCS:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o)
+LIBFT_OBJ_NAME = $(LIBFT_NAME:.c=.o)
 
-LIBFT_OBJS = $(LIBFT_SRCS:.c=.o)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+LIBFT_SRC = $(addprefix $(LIBFT_SRC_PATH)/,$(LIBFT_NAME))
+LIBFT_OBJ = $(addprefix $(LIBFT_OBJ_PATH)/,$(LIBFT_OBJ_NAME))
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(LIBFT_OBJ_PATH)%.o: $(LIBFT_SRC_PATH)%.c
+	@mkdir -p $(LIBFT_OBJ_PATH)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-libft: $(LIBFT_OBJS)
-	ar rcs libft.a $(LIBFT_OBJS)
+libft.a: $(LIBFT_OBJ)
+	ar rcs libft.a $(LIBFT_OBJ)
 
-$(NAME): libft $(OBJS)
-	gcc $(OBJS) -L. -lft -o $(NAME)
+$(NAME): $(OBJ) libft.a
+	$(CC) $(OBJ) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS) $(LIBFT_OBJS)
+	@-rm -fv $(LIBFT_OBJ) $(OBJ)
+	@rmdir $(LIBFT_OBJ_PATH) $(OBJ_PATH) obj 2> /dev/null || true
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f libft.a
+	@-rm -fv $(NAME) libft.a
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+ac: all clean
+
+norme:
+	norminette $(LIBFT_SRC) $(SRC) include/*.h
+
+.PHONY: all clean fclean re
