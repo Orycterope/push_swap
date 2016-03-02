@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/22 20:18:47 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/02 16:48:20 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,42 +41,53 @@ int		get_dist(t_pile *block1, t_pile *block2)
 		block1 = block1->next;
 		dist++;
 	}
+	if (dist > get_pile_size(block1) / 2)
+		return (dist - get_pile_size(block1) / 2);
 	return (dist);
 }
 
-t_pile	*get_next_unsorted(t_pile *pile)
+int		next_unsorted(t_pile *pile)
 {
-	t_pile	*start;
+	int		i;
+	t_pile	*top;
+	t_pile	*bottom;
 
 	if (pile == NULL)
-		return (NULL);
-	pile = pile->previous;
-	start = pile;
-	while (pile->previous != start)
+		return (0);
+	bottom = pile;
+	i = 0;
+	while (get_rank_of(bottom) != get_pile_size(pile))
 	{
-		if (pile->value > pile->previous->value)
-			return (pile);
-		pile = pile->previous;
+		i++;
+		bottom = bottom->next;
 	}
-	return (NULL);
+	top = bottom->previous;
+	while (bottom != top && bottom != top->next)
+	{
+		if (get_rank_of(bottom) != get_rank_of(bottom->next) + 1
+			|| get_rank_of(top) != get_rank_of(top->previous) + 1)
+			return (i);
+		bottom = bottom->next;
+		top = top->previous;
+		i++;
+	}
+	return (0);
 }
 
-int		is_rotate_sorted(t_pile *pile)
+int		is_sorted(t_pile *pile)
 {
-	t_pile	*start;
-	int		loop;
+	t_pile	*end;
 
 	if (pile == NULL)
 		return (1);
-	start = pile;
-	loop = 0;
-	while (pile != start || loop++ == 0)
+	end = pile->previous;
+	while (pile != end)
 	{
-		if (get_next_unsorted(pile) == NULL)
-			return (loop);
+		if (pile->value < pile->next->value)
+			return (0);
 		pile = pile->next;
 	}
-	return (0);
+	return (1);
 }
 
 int		get_rank_of(t_pile *pile)

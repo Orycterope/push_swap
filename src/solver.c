@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/02/29 22:23:24 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/02 16:22:10 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 	size = get_pile_size(pile);
 	out = 0;
 	rank = (sens == 1) ? size : 1;
-	if (get_rank_of(pile) == rank) //should be dist from top to next_unsorted
-		out += rank;
+	if (sens == 1)
+		out -= next_unsorted(pile);
 	while ((sens == 1 && rank != 0) || (sens == -1 && rank != size)) // one less
 	{
 		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
@@ -87,9 +87,10 @@ t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 char	*solve(t_pile *pile_tab[], char *flags)
 {
 	char	*op_lst;
+	//char	*operations[9];
 
 	op_lst = NULL;
-	while (pile_tab[1] != NULL || get_next_unsorted(pile_tab[0]) != NULL)
+	while (pile_tab[1] != NULL || is_sorted(pile_tab[0]) == 0)
 		pile_tab = choose_op(pile_tab, &op_lst, flags);
 	return (op_lst);
 }
