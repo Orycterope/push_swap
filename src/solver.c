@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/02 16:22:10 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/03 17:21:04 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 	{
 		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
 			|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
-			out += get_rank_of(pile) * get_rank_of(pile->next);
-		if ((sens == 1 && get_rank_of(pile) == size && get_rank_of(pile->previous) == 1)
+			out += get_rank_of(pile) * get_rank_of(pile->next) * 100;
+		/*if ((sens == 1 && get_rank_of(pile) == size && get_rank_of(pile->previous) == 1)
 			|| (sens == -1 && get_rank_of(pile) == size && get_rank_of(pile->next) == 1))
-			out += size;
+			out += size; */
 		rank -= sens;
 		pile = pile->next;
 	}
@@ -55,8 +55,8 @@ int		get_sorted_amount(t_pile *pile_tab[])
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	const char	*best_op;
-	char		*operations[] = {"sb", "ss", "ra", "rb", "rra", "rrb", "rr", "rrr", NULL };
-	char		*reverse_op[] = {"sb", "ss", "rra", "rrb", "ra", "rb", "rrr", "rr", NULL };
+	char		*operations[] = {"sb", "ss", "rra", "rb", "ra", "rrb", "rr", "rrr", NULL };
+	char		*reverse_op[] = {"sb", "ss", "ra", "rrb", "rra", "rb", "rrr", "rr", NULL };
 	int			best_value;
 	int			current_value; // not so useful
 	int			i;

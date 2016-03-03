@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/02 16:48:20 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/02 17:18:39 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ int		next_unsorted(t_pile *pile)
 
 	if (pile == NULL)
 		return (0);
-	bottom = pile;
 	i = 0;
-	while (get_rank_of(bottom) != get_pile_size(pile))
+	bottom = pile;
+	/*while (get_rank_of(bottom) != get_pile_size(pile))
 	{
 		i++;
 		bottom = bottom->next;
-	}
+	}*/
 	top = bottom->previous;
-	while (bottom != top && bottom != top->next)
+	while (bottom != top && bottom->next != top)
 	{
 		if (get_rank_of(bottom) != get_rank_of(bottom->next) + 1
 			|| get_rank_of(top) != get_rank_of(top->previous) + 1)
