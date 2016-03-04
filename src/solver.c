@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/03 17:21:04 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/04 14:50:29 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 	{
 		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
 			|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
-			out += get_rank_of(pile) * get_rank_of(pile->next) * 100;
+			out += get_rank_of(pile) * get_rank_of(pile->next) * 10;
 		/*if ((sens == 1 && get_rank_of(pile) == size && get_rank_of(pile->previous) == 1)
 			|| (sens == -1 && get_rank_of(pile) == size && get_rank_of(pile->next) == 1))
 			out += size; */
@@ -55,30 +55,40 @@ int		get_sorted_amount(t_pile *pile_tab[])
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	const char	*best_op;
-	char		*operations[] = {"sb", "ss", "rra", "rb", "ra", "rrb", "rr", "rrr", NULL };
-	char		*reverse_op[] = {"sb", "ss", "ra", "rrb", "rra", "rb", "rrr", "rr", NULL };
+	char		*operations[] = {"sb", "pa", "pb", "ss", "rra", "rb", "ra", "rrb", "rr", "rrr", NULL };
+	char		*reverse_op[] = {"sb", "pb", "pa", "ss", "ra", "rrb", "rra", "rb", "rrr", "rr", NULL };
 	int			best_value;
 	int			current_value; // not so useful
 	int			i;
 
+	//printf("----------- begin sa:\n");
+	//print_piles(pile_tab); //
 	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
+//	print_piles(pile_tab); //
 	best_op = "sa";
 	best_value = get_sorted_amount(pile_tab);
+	//printf("[sa] -> %d\n", best_value);
 	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
-	printf("[sa] -> %d\n", best_value);
+//	print_piles(pile_tab); //
+//	printf("----------- end sa:\n");
 
 	i = -1;
 	while (operations[++i] != NULL)
 	{
-		pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
-		if (!(pile_tab[1] == NULL && (operations[i][1] == 'b' || operations[i][2] == 'b')))
+//		printf("----------- begin %s:\n", operations[i]);
+		if (!(pile_tab[1] == NULL && (ft_strstr("sb pa ss rb rrb rrr rr", operations[i]))))
 		{
+//			print_piles(pile_tab); //
+			pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
+//			print_piles(pile_tab); //
 			current_value = get_sorted_amount(pile_tab);
 			best_op = (current_value > best_value) ? operations[i] : best_op;
 			best_value = (current_value > best_value) ? current_value : best_value;
+//			printf("[%s] -> %d\n", operations[i], current_value);
+			pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);
+//			print_piles(pile_tab); //
 		}
-		pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);
-		printf("[%s] -> %d\n", operations[i], current_value);
+//		printf("----------- end %s:\n", operations[i]);
 	}
 	pile_tab = do_operation((char *)best_op, pile_tab, op_lst, flags);
 	return (pile_tab);
