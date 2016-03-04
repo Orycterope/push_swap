@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/04 15:06:41 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/04 15:24:10 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 	rank = (sens == 1) ? size : 1;
 	if (sens == 1)
 		out -= next_unsorted(pile);
-	while ((sens == 1 && rank != 0) || (sens == -1 && rank != size)) // one less
+	while ((sens == 1 && rank > 0) || (sens == -1 && rank <= size))
 	{
 		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
 			|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
@@ -47,9 +47,10 @@ int		get_sorted_amount(t_pile *pile_tab[])
 
 	a_score = get_sorted_amount_of_pile(pile_tab[0], 1);
 	b_score = get_sorted_amount_of_pile(pile_tab[1], -1);
-	if (b_score % 2 != 0)
+	/*if (b_score % 2 != 0)
 		b_score++;
-	return (a_score + b_score / 2);
+	return (a_score + b_score / 2); */
+	return (a_score + b_score);
 }
 
 t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
