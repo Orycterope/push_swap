@@ -21,6 +21,8 @@ SRC_PATH = src
 INC_PATH = include
 OBJ_PATH = obj/$(NAME)
 
+MAKEFLAGS += --no-print-directory
+
 SRC_NAME =	push_swap.c \
 			pile.c \
 			operation.c \
