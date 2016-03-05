@@ -35,7 +35,7 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 			|| (sens == -1 && get_rank_of(pile) == size && get_rank_of(pile->next) == 1))
 			out += size * 100;
 		if ((sens == 1 && get_rank_of(pile) == 1) || (sens == -1 && get_rank_of(pile) == size))
-			out -= (i < size / 2) ? i : size - i;
+			out -= (i <= size / 2) ? i : size - i;
 		i += sens;
 		pile = pile->next;
 	}
