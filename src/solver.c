@@ -16,17 +16,17 @@
 int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 {
 	int		size;
-	int		rank;
 	int		out;
+	int		i;
 
 	if (pile == NULL)
 		return (0);
 	size = get_pile_size(pile);
 	out = 0;
-	rank = (sens == 1) ? size : 1;
-	if (sens == 1)
+	i = (sens == 1) ? 1 : size;
+	if (sens == 1) /*just on pile A ? */
 		out -= next_unsorted(pile) * 10;
-	while ((sens == 1 && rank > 0) || (sens == -1 && rank <= size))
+	while ((sens == 1 && i <= size) || (sens == -1 && i > 0))
 	{
 		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
 			|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
@@ -35,8 +35,8 @@ int		get_sorted_amount_of_pile(t_pile *pile, int sens)
 			|| (sens == -1 && get_rank_of(pile) == size && get_rank_of(pile->next) == 1))
 			out += size * 100;
 		if ((sens == 1 && get_rank_of(pile) == 1) || (sens == -1 && get_rank_of(pile) == size))
-			out -= rank - 1;
-		rank -= sens;
+			out -= (i < size / 2) ? i : size - i;
+		i += sens;
 		pile = pile->next;
 	}
 	return (out);
