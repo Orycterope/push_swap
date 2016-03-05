@@ -23,6 +23,27 @@ t_pile	*create_block(int nbr)
 	return (block);
 }
 
+int		has_duplicate(t_pile *pile)
+{
+	t_pile	*start;
+	t_pile	*end;
+
+	start = pile;
+	end = start->previous;
+	while (start != end)
+	{
+		pile = start->next;
+		while (pile != start)
+		{
+			if (start->value == pile->value)
+				return (1);
+				pile = pile->next;
+		}
+		start = start->next;
+	}
+	return (0);
+}
+
 t_pile	*append_to_pile(int nbr, t_pile *pile)
 {
 	t_pile	*new_block;
