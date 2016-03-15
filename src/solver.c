@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/15 20:02:20 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/15 20:17:03 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	should_rotate_swap(t_pile *pile)
 	t_pile	*top;
 	int		rank;
 
+	if (get_pile_size(pile) < 4)
+		return (0);
 	top = pile->previous;
 	rank = 1;
 	while (get_rank_of(top) == rank)
@@ -25,7 +27,8 @@ static int	should_rotate_swap(t_pile *pile)
 		rank++;
 		top = top->previous;
 	}
-	return (get_rank_of(top) == get_pile_size(top)
+	return (rank == get_pile_size(top) - 1
+			&& get_rank_of(top) == get_pile_size(top)
 			&& get_rank_of(top->previous) == get_pile_size(top) - 1);
 }
 
@@ -36,7 +39,7 @@ static int	should_reverse_rotate(t_pile *pile)
 	int		dist;
 
 	dist = 0;
-	block1 = block2  = pile;
+	block1 = block2 = pile->previous;
 	while (get_rank_of(block1) != 1)
 		block1 = block1->next;
 	while (block1 != block2)
@@ -74,8 +77,6 @@ t_pile	**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
 		return (rotate_swap(pile_tab, op_lst, flags));
 	else if (get_rank_of(pile_tab[0]->previous) == 1)
 		return (do_operation("pb", pile_tab, op_lst, flags));
-	else if (get_rank_of(pile_tab[0]->previous) > get_rank_of(pile_tab[0]->previous->previous))
-		return (do_operation("sa", pile_tab, op_lst, flags));
 	else if (should_reverse_rotate(pile_tab[0]))
 		return (do_operation("rra", pile_tab, op_lst, flags));
 	else
