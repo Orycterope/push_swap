@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/15 19:23:50 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/15 19:53:49 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	should_rotate_swap(t_pile *pile)
 		rank++;
 		top = top->previous;
 	}
-	return (rank == get_pile_size(top) - 1
-			&& get_rank_of(top->previous) == rank + 1);
+	return (get_rank_of(top) == get_pile_size(top)
+			&& get_rank_of(top->previous) == get_pile_size(top) - 1);
 }
 
 t_pile	**rotate_swap(t_pile *pile_tab[], char	**op_lst, char *flags)
