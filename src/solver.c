@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/15 20:17:03 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/15 20:28:05 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,17 @@ t_pile	**push_all_a(t_pile *pile_tab[], char **op_lst, char *flags)
 
 t_pile	**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
 {
+	t_pile	*top;
+
+	top = pile_tab[0]->previous;
 	if (is_sorted(pile_tab[0]))
 		return (push_all_a(pile_tab, op_lst, flags));
 	else if (should_rotate_swap(pile_tab[0]))
 		return (rotate_swap(pile_tab, op_lst, flags));
-	else if (get_rank_of(pile_tab[0]->previous) == 1)
+	else if (get_rank_of(top) == 1)
 		return (do_operation("pb", pile_tab, op_lst, flags));
+	else if (get_rank_of(top) > get_rank_of(top->previous))
+		return (do_operation("sa", pile_tab, op_lst, flags));
 	else if (should_reverse_rotate(pile_tab[0]))
 		return (do_operation("rra", pile_tab, op_lst, flags));
 	else
