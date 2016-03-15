@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/02 17:18:39 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/15 19:20:11 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		get_dist(t_pile *block1, t_pile *block2)
 		dist++;
 	}
 	if (dist > get_pile_size(block1) / 2)
-		return (dist - get_pile_size(block1) / 2);
+		return (-(dist - get_pile_size(block1) / 2));
 	return (dist);
 }
 

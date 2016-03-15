@@ -6,105 +6,68 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/04 15:24:10 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/15 19:23:50 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
 #include <stdio.h>
 
-int		get_sorted_amount_of_pile(t_pile *pile, int sens)
+static int	should_rotate_swap(t_pile *pile)
 {
-	int		size;
-	int		out;
-	int		i;
+	t_pile	*top;
+	int		rank;
 
-	if (pile == NULL)
-		return (0);
-	size = get_pile_size(pile);
-	out = 0;
-	i = (sens == 1) ? 1 : size;
-	if (sens == 1) /*just on pile A ? */
-		out -= next_unsorted(pile) * 10;
-	while ((sens == 1 && i <= size) || (sens == -1 && i > 0))
+	top = pile->previous;
+	rank = 1;
+	while (get_rank_of(top) == rank)
 	{
-		if ((sens == 1 && get_rank_of(pile->next) == get_rank_of(pile) - 1)
-			|| (sens == -1 && get_rank_of(pile->next) == get_rank_of(pile) + 1))
-			out += get_rank_of(pile) * get_rank_of(pile->next) * 100;
-		if ((sens == 1 && get_rank_of(pile) == size && get_rank_of(pile->previous) == 1)
-			|| (sens == -1 && get_rank_of(pile) == size && get_rank_of(pile->next) == 1))
-			out += size * 100;
-		if ((sens == 1 && get_rank_of(pile) == 1) || (sens == -1 && get_rank_of(pile) == size))
-			out -= (i <= size / 2) ? i : size - i;
-		i += sens;
-		pile = pile->next;
+		rank++;
+		top = top->previous;
 	}
-	return (out);
+	return (rank == get_pile_size(top) - 1
+			&& get_rank_of(top->previous) == rank + 1);
 }
 
-int		get_sorted_amount(t_pile *pile_tab[])
+t_pile	**rotate_swap(t_pile *pile_tab[], char	**op_lst, char *flags)
 {
-	int		a_score;
-	int		b_score;
-
-	a_score = get_sorted_amount_of_pile(pile_tab[0], 1);
-	b_score = get_sorted_amount_of_pile(pile_tab[1], -1);
-	/*if (b_score % 2 != 0)
-		b_score++;
-	return (a_score + b_score / 2); */
-	return (a_score + b_score);
-}
-
-t_pile	**choose_op(t_pile *pile_tab[], char **op_lst, char *flags)
-{
-	const char	*best_op;
-	char		*operations[] = {"sb", "pa", "pb", "ss", "rra", "rb", "ra", "rrb", "rr", "rrr", NULL };
-	char		*reverse_op[] = {"sb", "pb", "pa", "ss", "ra", "rrb", "rra", "rb", "rrr", "rr", NULL };
-	int			best_value;
- 	int			current_value;  /*not so useful */
-	int			i;
-
-// 	printf("----------- begin sa:\n");
-// 	print_piles(pile_tab);
-	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
-// 	print_piles(pile_tab);
-	best_op = "sa";
- 	best_value = get_sorted_amount(pile_tab);
-	printf("[sa] -> %d\n", best_value);
-	pile_tab = do_operation("sa", pile_tab, NULL, NULL);
-// 	print_piles(pile_tab);
-// 	printf("----------- end sa:\n");
-
-	i = -1;
-	while (operations[++i] != NULL)
-	{
-// 		printf("----------- begin %s:\n", operations[i]);
-		if (!(get_pile_size(pile_tab[1]) < 2
-					&& (ft_strstr("sb pa ss rb rrb rrr rr", operations[i]))))
-		{
-// 			print_piles(pile_tab);
-			pile_tab = do_operation(operations[i], pile_tab, NULL, NULL);
-// 			print_piles(pile_tab);
-			current_value = get_sorted_amount(pile_tab);
-			best_op = (current_value > best_value) ? operations[i] : best_op;
-			best_value = (current_value > best_value) ? current_value : best_value;
- 			printf("[%s] -> %d\n", operations[i], current_value);
-			pile_tab = do_operation(reverse_op[i], pile_tab, NULL, NULL);
-// 			print_piles(pile_tab);
-		}
-// 		printf("----------- end %s:\n", operations[i]);
-	}
-	pile_tab = do_operation((char *)best_op, pile_tab, op_lst, flags);
+	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("sa", pile_tab, op_lst, flags);
+	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
 	return (pile_tab);
+}
+
+t_pile	**push_all_a(t_pile *pile_tab[], char **op_lst, char *flags)
+{
+	while (pile_tab[1] != NULL)
+		pile_tab = do_operation("pa", pile_tab, op_lst, flags);
+	return (pile_tab);
+}
+
+t_pile	**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
+{
+	if (is_sorted(pile_tab[0]))
+		return (push_all_a(pile_tab, op_lst, flags));
+	else if (should_rotate_swap(pile_tab[0]))
+		return (rotate_swap(pile_tab, op_lst, flags));
+	else if (get_rank_of(pile_tab[0]->previous) == 1)
+		return (do_operation("pb", pile_tab, op_lst, flags));
+	else if (get_rank_of(pile_tab[0]->previous) > get_rank_of(pile_tab[0]->previous->previous))
+		return (do_operation("sa", pile_tab, op_lst, flags));
+	else if (0)
+		return (do_operation("rra", pile_tab, op_lst, flags));
+	else
+		return (do_operation("ra", pile_tab, op_lst, flags));
 }
 
 char	*solve(t_pile *pile_tab[], char *flags)
 {
 	char	*op_lst;
-// 	char	*operations[9];
 
 	op_lst = NULL;
 	while (pile_tab[1] != NULL || is_sorted(pile_tab[0]) == 0)
-		pile_tab = choose_op(pile_tab, &op_lst, flags);
+		pile_tab = push_all_b(pile_tab, &op_lst, flags);
 	return (op_lst);
 }
