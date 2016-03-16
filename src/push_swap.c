@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/22 20:09:19 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/16 13:51:15 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void		display_usage(char *command)
 	ft_putstr("usage: ");
 	ft_putstr(command);
 	ft_putstr(" [-v] [-c] nbr [...]\n");
+	exit(0);
+}
+
+void		print_error()
+{
+	ft_putstr("Error\n");
 	exit(0);
 }
 
@@ -72,7 +78,7 @@ int			main(int ac, char *av[])
 	pile_tab[0] = save_param_to_pile(ac, av, command);
 	pile_tab[1] = NULL;
 	if (has_duplicate(pile_tab[0]))
-		display_usage(command);
+		print_error();
 	if (ft_strchr(flags, 'v'))
 		print_piles(pile_tab);
 	op_list = solve(pile_tab, flags);
