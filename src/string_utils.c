@@ -6,10 +6,12 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:25:15 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/22 22:05:42 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:18:03 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "pile.h"
+#include "solver.h"
 #include "string_utils.h"
 
 static void	print_op_color(char *op)
@@ -58,4 +60,14 @@ void		format_rot_str(char *op)
 	ft_strcpy(cpy, "r");
 	ft_strcat(cpy, op);
 	ft_strcpy(op, cpy);
+}
+
+t_pile		**rotate_swap(t_pile *pile_tab[], char **op_lst, char *flags)
+{
+	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("sa", pile_tab, op_lst, flags);
+	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
+	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
+	return (pile_tab);
 }

@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 20:03:19 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/04 15:17:08 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:13:42 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,5 @@ t_pile	**do_swap_op(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
 		pile_tab[1] = operation_swap(pile_tab[1]);
 	if (op_lst != NULL)
 		add_operation(pile_tab, flags, op_lst, op);
-	return (pile_tab);
-}
-
-t_pile	**do_operation(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
-{
-	if (op[0] == 's')
-		pile_tab = do_swap_op(op, pile_tab, op_lst, flags);
-	else if (op [0] == 'p')
-	{
-		pile_tab = operation_push(pile_tab, (op[1] == 'a') ? 0 : 1);
-		if (op_lst != NULL)
-			add_operation(pile_tab, flags, op_lst, op);
-	}
-	else
-		pile_tab = do_rot_op(op, pile_tab, op_lst, flags);
 	return (pile_tab);
 }

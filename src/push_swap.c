@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 15:22:25 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/16 13:51:15 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:08:13 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		display_usage(char *command)
 	exit(0);
 }
 
-void		print_error()
+void		print_error(void)
 {
 	ft_putstr("Error\n");
 	exit(0);

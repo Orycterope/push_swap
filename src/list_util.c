@@ -6,11 +6,12 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 18:49:57 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/15 19:20:11 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:14:14 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list_util.h"
+#include "operation.h"
 
 int		get_pile_size(t_pile *pile)
 {
@@ -46,34 +47,6 @@ int		get_dist(t_pile *block1, t_pile *block2)
 	return (dist);
 }
 
-int		next_unsorted(t_pile *pile)
-{
-	int		i;
-	t_pile	*top;
-	t_pile	*bottom;
-
-	if (pile == NULL)
-		return (0);
-	i = 0;
-	bottom = pile;
-	/*while (get_rank_of(bottom) != get_pile_size(pile))
-	{
-		i++;
-		bottom = bottom->next;
-	}*/
-	top = bottom->previous;
-	while (bottom != top && bottom->next != top)
-	{
-		if (get_rank_of(bottom) != get_rank_of(bottom->next) + 1
-			|| get_rank_of(top) != get_rank_of(top->previous) + 1)
-			return (i);
-		bottom = bottom->next;
-		top = top->previous;
-		i++;
-	}
-	return (0);
-}
-
 int		is_sorted(t_pile *pile)
 {
 	t_pile	*end;
@@ -105,4 +78,19 @@ int		get_rank_of(t_pile *pile)
 		pile = pile->next;
 	}
 	return (rank + 1);
+}
+
+t_pile	**do_operation(char *op, t_pile *pile_tab[], char **op_lst, char *flags)
+{
+	if (op[0] == 's')
+		pile_tab = do_swap_op(op, pile_tab, op_lst, flags);
+	else if (op[0] == 'p')
+	{
+		pile_tab = operation_push(pile_tab, (op[1] == 'a') ? 0 : 1);
+		if (op_lst != NULL)
+			add_operation(pile_tab, flags, op_lst, op);
+	}
+	else
+		pile_tab = do_rot_op(op, pile_tab, op_lst, flags);
+	return (pile_tab);
 }

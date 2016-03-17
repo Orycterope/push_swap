@@ -6,7 +6,7 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:34:06 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/01/22 21:00:58 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:07:48 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		has_duplicate(t_pile *pile)
 		{
 			if (start->value == pile->value)
 				return (1);
-				pile = pile->next;
+			pile = pile->next;
 		}
 		start = start->next;
 	}

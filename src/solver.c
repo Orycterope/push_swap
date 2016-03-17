@@ -6,12 +6,12 @@
 /*   By: tvermeil <tvermeil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:40:12 by tvermeil          #+#    #+#             */
-/*   Updated: 2016/03/15 20:28:05 by tvermeil         ###   ########.fr       */
+/*   Updated: 2016/03/17 14:17:02 by tvermeil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solver.h"
-#include <stdio.h>
+#include "string_utils.h"
 
 static int	should_rotate_swap(t_pile *pile)
 {
@@ -39,7 +39,8 @@ static int	should_reverse_rotate(t_pile *pile)
 	int		dist;
 
 	dist = 0;
-	block1 = block2 = pile->previous;
+	block1 = pile->previous;
+	block2 = pile->previous;
 	while (get_rank_of(block1) != 1)
 		block1 = block1->next;
 	while (block1 != block2)
@@ -52,24 +53,14 @@ static int	should_reverse_rotate(t_pile *pile)
 	return (0);
 }
 
-t_pile	**rotate_swap(t_pile *pile_tab[], char	**op_lst, char *flags)
-{
-	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
-	pile_tab = do_operation("rra", pile_tab, op_lst, flags);
-	pile_tab = do_operation("sa", pile_tab, op_lst, flags);
-	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
-	pile_tab = do_operation("ra", pile_tab, op_lst, flags);
-	return (pile_tab);
-}
-
-t_pile	**push_all_a(t_pile *pile_tab[], char **op_lst, char *flags)
+t_pile		**push_all_a(t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	while (pile_tab[1] != NULL)
 		pile_tab = do_operation("pa", pile_tab, op_lst, flags);
 	return (pile_tab);
 }
 
-t_pile	**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
+t_pile		**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
 {
 	t_pile	*top;
 
@@ -88,7 +79,7 @@ t_pile	**push_all_b(t_pile *pile_tab[], char **op_lst, char *flags)
 		return (do_operation("ra", pile_tab, op_lst, flags));
 }
 
-char	*solve(t_pile *pile_tab[], char *flags)
+char		*solve(t_pile *pile_tab[], char *flags)
 {
 	char	*op_lst;
 
